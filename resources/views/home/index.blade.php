@@ -3,17 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="OneUIUX HTML website template by Maxartkiller. Bootstrap UI UX, Bootstrap theme, Bootstrap HTML, Bootstrap template, Bootstrap website, multipurpose website template. get bootstrap template, website">
-    <meta name="author" content="Maxartkiller">
+    <meta name="description" content="TikTok Download Manager - Get Video You Interest Offline.">
+    <meta name="author" content="TTDM">
 
-    <title>OneUIUX -One UI UX Bootstrap Mobile App HTML template by Maxartkiller</title>
+    <title>TikTok Download Manager - Get Video You Interest Offline</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{ asset('assets/img/favicons/apple-touch-icon.html') }}" sizes="180x180">
-    <link rel="icon" href="{{ asset('assets/img/favicons/favicon-32x32.png') }}" sizes="32x32" type="image/png">
-    <link rel="icon" href="{{ asset('assets/img/favicons/favicon-16x16.png') }}" sizes="16x16" type="image/png">
     <link rel="mask-icon" href="{{ asset('assets/img/favicons/safari-pinned-tab.html') }}" color="#ffffff">
-    <link rel="icon" href="{{ asset('assets/img/favicons/favicon.ico') }}">
+    <link rel="icon" href="{{ asset('assets/img/logo/logo-icon.png') }}" type="image/png">
 
     <!-- Elegant font icons -->
     <link href="{{ asset('assets/vendor/elegant_font/HTMLCSS/style.css') }}" rel="stylesheet">
@@ -25,7 +23,88 @@
     <link href="{{ asset('assets/vendor/swiper/css/swiper.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/css/style-purple.css') }}" rel="stylesheet" id="style">
+    <link href="{{ asset('assets/css/style-dark-blue.css') }}" rel="stylesheet" id="style">
+
+    <!-- Icons Css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/@mdi/css/materialdesignicons.min.css') }}" />
+
+    <style>
+        .video-wrapper {
+            width: 100%;
+        }
+    
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px; /* optional */
+        }
+    </style>
+
+    <style>
+        .skeleton-card {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 16px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .skeleton {
+            background-color: #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .skeleton.avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .skeleton.text-sm {
+            height: 12px;
+            width: 60%;
+            margin-top: 6px;
+        }
+
+        .skeleton.text-md {
+            height: 16px;
+            width: 40%;
+            margin-top: 10px;
+        }
+
+        .skeleton.video {
+            height: 300px;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .skeleton.meta {
+            height: 12px;
+            width: 80%;
+            margin-top: 12px;
+        }
+
+        .skeleton.button {
+            height: 35px;
+            width: 100px;
+            margin: 10px auto 0;
+            border-radius: 25px;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: #f0f0f0;
+            }
+            50% {
+                background-color: #e0e0e0;
+            }
+            100% {
+                background-color: #f0f0f0;
+            }
+        }
+    </style>
+
 </head>
 
 <body class="ui-rounded">
@@ -36,26 +115,11 @@
             </div>
             <div class="col-12 align-self-center text-center">
                 <div class="loader-logo">
-                    {{-- <a href="#"> --}}
-                        <img src="{{ asset('assets/img/logo/logo.png') }}" alt="">
-                    {{-- </a> --}}
-                    {{-- <div class="logo">1<span>UX</span><span>UI</span>
-                        <div class="loader-roller">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <h4 class="logo-text"><span>OneUIUX</span><small>Mobile HTML</small></h4> --}}
+                    <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40" style="border-radius: 8px;">
                 </div>
             </div>
             <div class="col-12 align-self-end text-center">
-                <p class="my-5">Please wait<br><small class="text-mute">A world of great designs is loading...</small></p>
+                <p class="my-5">Please wait<br><small class="text-mute">download manager is loading...</small></p>
             </div>
         </div>
     </div>
@@ -70,10 +134,8 @@
                 </button>
             </div>
             <div>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40" style="border-radius: 8px;">
-                    {{-- <div class="logo">1<span>UX</span><span>UI</span></div>
-                    <h4 class="logo-text"><span>OneUIUX</span><small>Mobile HTML</small></h4> --}}
                 </a>
             </div>
             <div>
@@ -82,7 +144,7 @@
                     <button class="btn btn-link btn-44" type="submit"><span class="icon_search"></span></button>
                 </form>
                 <button class="btn btn-link search-btn" type="button"><span class="icon_search"></span></button>
-                <a href="#" class=""><span class="avatar avatar-30"><img src="{{ asset('assets/img/user1.png') }}" alt=""></span></a>
+                <a href="#" class=""><span class="avatar avatar-30"><img src="{{ $profilData['avatarTumb'] }}" alt=""></span></a>
             </div>
         </nav>
     </header>
@@ -93,26 +155,21 @@
         <div class="row no-gutters">
             <div class="col-auto align-self-center">
                 <figure class="avatar avatar-50">
-                    <img src="{{ asset('assets/img/user1.png') }}" alt="">
+                    <img src="{{ $profilData['avatarTumb'] }}" alt="">
                 </figure>
             </div>
             <div class="col pl-3 align-self-center">
-                <p class="my-0">Maxartkiller</p>
-                <p class="text-mute my-0 small">United States</p>
+                <p class="my-0">{{ $profilData['nickname'] }}</p>
+                <p class="text-mute my-0 small">{{ '@'.$profilData['username'] }}</p>
             </div>
             <div class="col-auto align-self-center">
                 <a href="login.html" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
         </div>
         <div class="list-group main-menu my-4">
-            <a href="index.html" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Home</a>
-            <a href="aboutus.html" class="list-group-item list-group-item-action"><i class="material-icons">business</i>About</a>
-            <a href="latestnews.html" class="list-group-item list-group-item-action"><i class="material-icons">view_day</i>Latest news</a>
-            <a href="friends.html" class="list-group-item list-group-item-action"><i class="material-icons">insert_emoticon</i>Friends <small class="text-mute">(250)</small></a>
-            <a href="subscribed.html" class="list-group-item list-group-item-action"><i class="material-icons">library_books</i>Subscribed</a>
-            <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a>
-            <a href="setting.html" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>Setting</a>
-            <a href="elements.html" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>Pages & Elements</a>
+            <a href="{{ route('home') }}" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Home</a>
+            <a data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>Following<span class="badge badge-dark text-white">{{ $profilData['following'] }}</span></a>
+            <a data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>Followers<span class="badge badge-dark text-white">{{ $profilData['follower'] }}</span></a>
         </div>
     </div>
     <!-- sidebar ends -->
@@ -122,1490 +179,50 @@
         <!-- page content goes here -->
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="container-fluid py-3 bg-white border-bottom">
-                    <!-- Swiper -->
-                    <div class="swiper-container swiper-stories">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container mt-4" id="video-container">
+                    <!-- Cards loaded via JS -->
                 </div>
-                <div class="container my-4">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <textarea class="form-control border-0" rows="2" placeholder="Write your post here..."></textarea>
-                        </div>
-                        <div class="card-footer py-2">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-link btn-sm px-2 text-default"><i class="material-icons vm">collections</i></button>
-                                    <button class="btn btn-link btn-sm px-2 text-default"><i class="material-icons vm">camera_alt</i></button>
-                                    <button class="btn btn-link btn-sm px-2 text-default"><i class="material-icons vm">date_range</i></button>
-
-                                </div>
-                                <div class="col-auto align-self-center">
-                                    <button class="btn btn-sm btn-default text-uppercase px-3"><span>Post</span> </button>
+                <!-- Skeleton Loading Placeholder -->
+                <div class="container mt-4" id="skeleton-loader" style="display:none;">
+                    @for ($i = 0; $i < 1; $i++)
+                        <div class="skeleton-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="skeleton avatar mr-2"></div>
+                                <div>
+                                    <div class="skeleton text-md"></div>
+                                    <div class="skeleton text-sm"></div>
                                 </div>
                             </div>
+                            <div class="skeleton video"></div>
+                            <div class="skeleton meta"></div>
+                            <div class="skeleton button"></div>
                         </div>
-                    </div>
+                    @endfor
                 </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="swiper-container swiper-stories multiple">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide w-auto px-2">
-                                    <div class="card w-180 mb-4 position-relative overflow-hidden text-white">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/ecommercecover.jpg') }}" alt="">
-                                        </div>
-                                        <div class="card-body text-center z-1 h-100px">
-                                        </div>
-                                        <div class="card-footer border-0 z-1 text-center">
-                                            <figure class="avatar avatar-40 mb-3">
-                                                <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                            </figure>
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">United States</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide w-auto px-2">
-                                    <div class="card w-180 mb-4 position-relative overflow-hidden text-white">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/hero10.jpg') }}" alt="">
-                                        </div>
-                                        <div class="card-body text-center z-1 h-100px">
-                                        </div>
-                                        <div class="card-footer border-0 z-1 text-center">
-                                            <figure class="avatar avatar-40 mb-3">
-                                                <img src="{{ asset('assets/img/user3.png') }}" alt="Generic placeholder image">
-                                            </figure>
-                                            <h6 class="mb-1">Johnson Maxu</h6>
-                                            <p class="mb-0 text-mute small">United States</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide w-auto px-2">
-                                    <div class="card w-180 mb-4 position-relative overflow-hidden text-white">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/ecommercecover.jpg') }}" alt="">
-                                        </div>
-                                        <div class="card-body text-center z-1 h-100px">
-                                        </div>
-                                        <div class="card-footer border-0 z-1 text-center">
-                                            <figure class="avatar avatar-40 mb-3">
-                                                <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                            </figure>
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">United States</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide w-auto px-2">
-                                    <div class="card w-180 mb-4 position-relative overflow-hidden text-white">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/hero10.jpg') }}" alt="">
-                                        </div>
-                                        <div class="card-body text-center z-1 h-100px">
-                                        </div>
-                                        <div class="card-footer border-0 z-1 text-center">
-                                            <figure class="avatar avatar-40 mb-3">
-                                                <img src="{{ asset('assets/img/user3.png') }}" alt="Generic placeholder image">
-                                            </figure>
-                                            <h6 class="mb-1">Johnson Maxu</h6>
-                                            <p class="mb-0 text-mute small">United States</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <figure class="avatar avatar-40 mr-2">
-                                    <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mb-1">Mariyam Saxena</h6>
-                                    <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                </div>
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn dropdown-toggle btn-sm btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">Refresh</a>
-                                        <a href="#" class="dropdown-item">Setting</a>
-                                        <a href="#" class="dropdown-item">Close</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-0 text-mute">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip Lorem ipsum dolor sit amet. </p>
-                        </div>
-                        <div class="card-footer border-top bg-light">
-                            <p class="small"><b>250</b> Likes, <b>50</b> Comments, <b>10</b> Share </p>
-                        </div>
-                        <div class="card-footer border-top">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-danger">favorite_border</i> <span class="d-none d-sm-inline-block">Like</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-warning">chat</i> <span class="d-none d-sm-inline-block">Comments</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-success">share</i> <span class="d-none d-sm-inline-block">Share</span></button>
-
-                                </div>
-                                <div class="col-auto ">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons">equalizer</i> <span class="d-none d-sm-inline-block">Analytics</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <figure class="avatar avatar-40 mr-2">
-                                    <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mb-1">Mariyam Saxena</h6>
-                                    <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                </div>
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn dropdown-toggle btn-sm btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">Refresh</a>
-                                        <a href="#" class="dropdown-item">Setting</a>
-                                        <a href="#" class="dropdown-item">Close</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-0 text-mute">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip Lorem ipsum dolor sit amet. </p>
-                        </div>
-                        <div class="card-img p-0">
-                            <img src="{{ asset('assets/img/hero6.jpg') }}" alt="" class="w-100">
-                        </div>
-                        <div class="card-footer border-top bg-light">
-                            <p class="small"><b>250</b> Likes, <b>50</b> Comments, <b>10</b> Share </p>
-                        </div>
-                        <div class="card-footer border-top">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-danger">favorite_border</i> <span class="d-none d-sm-inline-block">Like</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-warning">chat</i> <span class="d-none d-sm-inline-block">Comments</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-success">share</i> <span class="d-none d-sm-inline-block">Share</span></button>
-
-                                </div>
-                                <div class="col-auto ">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons">equalizer</i> <span class="d-none d-sm-inline-block">Analytics</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <div class="icons icon-circle icon-40 bg-light-primary text-primary mr-3">
-                                    <i class="material-icons vm">public</i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="my-0">What people are saying</h6>
-                                    <p class="text-mute mb-0">Best testimonial received</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body text-center bg-light-secondary">
-                            <h4 class="my-4">"Working with John is awesome and we have done several project together. He will surely surprise what outcome will be delivered."</h4>
-                        </div>
-                        <div class="card-footer text-center border-top">
-                            <figure class="avatar avatar-60 mx-auto mb-2 top-40">
-                                <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                            </figure>
-                            <h6>Angelina D'souza</h6>
-                            <p class="text-mute small mb-0">Vice President, Collsera Tribute, UK</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/ecommercecover.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-40 bg-default text-white mr-3">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Trending</h6>
-                                            <p class="text-mute mb-0">Most 5 Star</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-100px">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero16.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-40 bg-default text-white mr-3">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Trending</h6>
-                                            <p class="text-mute mb-0">Most 5 Star</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-100px">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="row">
-                                <div class="col-4">
-                                    <figure class="m-0 h-150 w-100 card position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/team1.jpg') }}" alt="">
-                                        </div>
-                                    </figure>
-                                </div>
-                                <div class="col align-self-center">
-                                    <p class="mb-2"><a href="#">Awesome people create awesome things</a></p>
-                                    <p class="small text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis. Lorem ipsum dolor sit amet.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="row">
-                                <div class="col-4">
-                                    <figure class="m-0 h-150 w-100 card position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/team5.jpg') }}" alt="">
-                                        </div>
-                                    </figure>
-                                </div>
-                                <div class="col align-self-center">
-                                    <p class="mb-2"><a href="#">Creative people create creative things</a></p>
-                                    <p class="small text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis. Lorem ipsum dolor sit amet.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <h5 class="page-subtitle">Follow people</h5>
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <div class="media mb-4">
-                                <figure class="avatar avatar-50 mr-3">
-                                    <img src="{{ asset('assets/img/user1.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mt-1 mb-1">John Doe <span class="status vm bg-success"></span></h6>
-                                    <p class="small text-mute">New Jersey, UK</p>
-                                </div>
-                                <button class="btn btn-default btn-44 shadow-sm"><i class="material-icons">person_add</i></button>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="media mb-4">
-                                <figure class="avatar avatar-50 mr-3">
-                                    <img src="{{ asset('assets/img/user2.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mt-1 mb-1">Astha Shrestha <span class="status vm bg-success"></span></h6>
-                                    <p class="small text-mute">New Jersey, UK</p>
-                                </div>
-                                <button class="btn btn-default btn-44 shadow-sm"><i class="material-icons">person_add</i></button>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="media mb-4">
-                                <figure class="avatar avatar-50 mr-3">
-                                    <img src="{{ asset('assets/img/user3.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mt-1 mb-1">Naveen Sayeed <span class="status vm bg-success"></span></h6>
-                                    <p class="small text-mute">New Jersey, UK</p>
-                                </div>
-                                <button class="btn btn-default btn-44 shadow-sm"><i class="material-icons">person_add</i></button>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="media mb-4">
-                                <figure class="avatar avatar-50 mr-3">
-                                    <img src="{{ asset('assets/img/user4.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mt-1 mb-1">Naveen Sayeed <span class="status vm bg-success"></span></h6>
-                                    <p class="small text-mute">New Jersey, UK</p>
-                                </div>
-                                <button class="btn btn-default btn-44 shadow-sm"><i class="material-icons">person_add</i></button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center my-3" id="no-more" style="display:none;">
+                    <p class="text-muted">No more videos</p>
                 </div>
             </div>
             <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
-                <div class="container-fluid pt-4 h-250 bg-default">
-                    <input type="text" class="form-control" placeholder="Search here...">
-                    <div class="swiper-container swiper-stories2 mt-4">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide w-auto pr-2">
-                                <button class="btn btn-light btn-sm">All</button>
+                <div class="container-fluid pt-5 h-150 bg-default">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="username" placeholder="Search username...">
+                                <div class="input-group-text">
+                                    <button class="btn btn-sm btn-primary text-white" id="searchBtn" type="button">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="swiper-slide w-auto pr-2">
-                                <button class="btn btn-outline-light btn-sm">People</button>
-                            </div>
-                            <div class="swiper-slide w-auto pr-2">
-                                <button class="btn btn-outline-light btn-sm">Stories</button>
-                            </div>
-                            <div class="swiper-slide w-auto pr-2">
-                                <button class="btn btn-outline-light btn-sm">Market</button>
-                            </div>
-                            <div class="swiper-slide w-auto pr-2">
-                                <button class="btn btn-outline-light btn-sm">Posts</button>
-                            </div>
-                            <div class="swiper-slide w-auto pr-2">
-                                <button class="btn btn-outline-light btn-sm">Product</button>
-                            </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
-                <div class="swiper-container swiper-stories3 multiple top-100">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide w-250 px-3 pb-4">
-                            <div class="card border-0 shadow position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/team6.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Best</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-150">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide w-250 px-3 pb-4">
-                            <div class="card border-0 shadow position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/ecommercecover.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Popular</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-150">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide w-250 px-3 pb-4">
-                            <div class="card border-0 shadow position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero9.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Popular</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-150">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide w-250 px-3 pb-4">
-                            <div class="card border-0 shadow position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero15.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Awesome</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-150">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <h6 class="page-subtitle">Stories</h6>
-                    <!-- Swiper -->
-                    <div class="swiper-container swiper-stories2">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="swiper-slide read w-auto">
-                                <a class="col-auto px-2" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-70 rounded-circle">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <h6 class="page-subtitle">Trendings</h6>
-                    <div class="row grid">
-                        <div class="grid-sizer col-6 col-md-4">
-                        </div>
-                        <div class="grid-item col-6 col-md-4">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero8.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Best</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-100px">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-6 col-md-4">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero13.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Popular</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-150">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-6 col-md-4">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero11.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Awesome</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-150">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-6 col-md-4">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero10.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Liked</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-200">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-6 col-md-4">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero9.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Trending</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-150">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-6 col-md-4">
-                            <div class="card mb-4 position-relative overflow-hidden text-white">
-                                <div class="background">
-                                    <img src="{{ asset('assets/img/hero6.jpg') }}" alt="">
-                                </div>
-                                <div class="card-header border-0 bg-none">
-                                    <div class="media">
-                                        <div class="icons icon-circle icon-30 bg-default text-white mr-2 align-self-center">
-                                            <i class="material-icons vm">whatshot</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="my-0">Trending</h6>
-                                            <p class="text-mute mb-0">Most rated</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body text-center z-1 h-100px">
-
-                                </div>
-                                <div class="card-footer border-0 z-1">
-                                    <div class="media">
-                                        <figure class="avatar avatar-40 mr-2">
-                                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                        </figure>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Mariyam Saxena</h6>
-                                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <h6 class="page-subtitle">People</h6>
-                    <!-- Swiper -->
-                    <div class="swiper-container swiper-people multiple">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Mariyam</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Dyna</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">John</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Shrikant</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Mariyam</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Dyna</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">John</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-150">
-                                <div class="card">
-                                    <div class="card-header h-100px text-center position-relative overflow-hidden">
-                                        <div class="background">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Shrikant</h6>
-                                                <p class="mb-0 text-mute small">United States</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <h6 class="page-subtitle">Posts</h6>
-                    <div class="card mb-4">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <figure class="avatar avatar-40 mr-2">
-                                    <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mb-1">Mariyam Saxena</h6>
-                                    <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                </div>
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn dropdown-toggle btn-sm btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">Refresh</a>
-                                        <a href="#" class="dropdown-item">Setting</a>
-                                        <a href="#" class="dropdown-item">Close</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-0 text-mute">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip Lorem ipsum dolor sit amet. </p>
-                        </div>
-                        <div class="card-footer border-top bg-light">
-                            <p class="small"><b>250</b> Likes, <b>50</b> Comments, <b>10</b> Share </p>
-                        </div>
-                        <div class="card-footer border-top">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-danger">favorite_border</i> <span class="d-none d-sm-inline-block">Like</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-warning">chat</i> <span class="d-none d-sm-inline-block">Comments</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-success">share</i> <span class="d-none d-sm-inline-block">Share</span></button>
-
-                                </div>
-                                <div class="col-auto ">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons">equalizer</i> <span class="d-none d-sm-inline-block">Analytics</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <figure class="avatar avatar-40 mr-2">
-                                    <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mb-1">Mariyam Saxena</h6>
-                                    <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                </div>
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn dropdown-toggle btn-sm btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">Refresh</a>
-                                        <a href="#" class="dropdown-item">Setting</a>
-                                        <a href="#" class="dropdown-item">Close</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-0 text-mute">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip Lorem ipsum dolor sit amet. </p>
-                        </div>
-                        <div class="card-img p-0">
-                            <img src="{{ asset('assets/img/hero6.jpg') }}" alt="" class="w-100">
-                        </div>
-                        <div class="card-footer border-top bg-light">
-                            <p class="small"><b>250</b> Likes, <b>50</b> Comments, <b>10</b> Share </p>
-                        </div>
-                        <div class="card-footer border-top">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-danger">favorite_border</i> <span class="d-none d-sm-inline-block">Like</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-warning">chat</i> <span class="d-none d-sm-inline-block">Comments</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-success">share</i> <span class="d-none d-sm-inline-block">Share</span></button>
-
-                                </div>
-                                <div class="col-auto ">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons">equalizer</i> <span class="d-none d-sm-inline-block">Analytics</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <div class="icons icon-circle icon-40 bg-light-primary text-primary mr-3">
-                                    <i class="material-icons vm">public</i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="my-0">What people are saying</h6>
-                                    <p class="text-mute mb-0">Best testimonial received</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body text-center bg-light-secondary">
-                            <h4 class="my-4">"Working with John is awesome and we have done several project together. He will surely surprise what outcome will be delivered."</h4>
-                        </div>
-                        <div class="card-footer text-center border-top">
-                            <figure class="avatar avatar-60 mx-auto mb-2 top-40">
-                                <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                            </figure>
-                            <h6>Angelina D'souza</h6>
-                            <p class="text-mute small mb-0">Vice President, Collsera Tribute, UK</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="chat-tab">
-                <div class="container-fluid bg-default pt-3">
-                    <div class="row position-relative">
-                        <!-- use hn-60 if there is no page specific name required as below and remove below container -->
-                        <div class="container align-self-end">
-                            <ul class="nav nav-tabs nav-fill justift-content-center border-0" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="chat2-tab" data-toggle="tab" href="#chat2" role="tab" aria-controls="chat2" aria-selected="true">Chat</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="status-tab" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">Status</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="call-tab" data-toggle="tab" href="#call" role="tab" aria-controls="call" aria-selected="false">Call</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="chat2" role="tabpanel" aria-labelledby="chat2-tab">
-                        <div class="list-group list-group-flush my-0">
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mrs. Magon Johnson <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">"Thank you for your purchase"</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">GodFathers <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">Hello How are you?</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Max home <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">That was amazing article</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mr. Hulk <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">Nice to see you again</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Ms. Happylime <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">Thank you so much for this.</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mrs. Magon Johnson <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">"Thank you for your purchase"</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">GodFathers <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">Hello How are you?</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Max home <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">That was amazing article</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mr. Hulk <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">Nice to see you again</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="chat.html" class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Ms. Happylime <span class="float-right text-secondary text-mute small">12:55 AM</span></h6>
-                                        <p class="small text-mute">Thank you so much for this.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-tab">
-                        <div class="list-group list-group-flush my-0">
-                            <div class="list-group-item">
-                                <div class="row">
-                                    <a class="col-auto" data-toggle="modal" data-target="#statusmodal">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </figure>
-                                    </a>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">My status</h6>
-                                        <p class="small text-mute">2 min ago</p>
-                                    </div>
-                                    <div class="col-auto pl-0">
-                                        <div class="dropdown">
-                                            <button type="button" class="btn btn-link px-2 text-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Remove</a>
-                                                <a class="dropdown-item" href="#">Share</a>
-                                                <a class="dropdown-item" href="#">Add New</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item bg-light text-center py-2 text-mute">Recent Status</div>
-                            <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">GodFathers</h6>
-                                        <p class="small text-mute">3 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Max home</h6>
-                                        <p class="small text-mute">10 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mr. Hulk</h6>
-                                        <p class="small text-mute">18 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Ms. Happylime</h6>
-                                        <p class="small text-mute">20 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="list-group-item bg-light text-center py-2 text-mute">Viewed Status</div>
-                            <a class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mrs. Magon Johnson</h6>
-                                        <p class="small text-mute">23 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">GodFathers</h6>
-                                        <p class="small text-mute">53 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Max home</h6>
-                                        <p class="small text-mute">55 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mr. Hulk</h6>
-                                        <p class="small text-mute">58 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Ms. Happylime</h6>
-                                        <p class="small text-mute">59 min ago</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="call" role="tabpanel" aria-labelledby="call-tab">
-                        <div class="list-group list-group-flush my-0">
-                            <div class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">GodFathers</h6>
-                                        <p class="small text-mute"><i class="h6  my-0 material-icons text-success vm">call_made</i> 3 min ago</p>
-                                    </div>
-                                    <div class="col-auto pl-0">
-                                        <button class="btn btn-link text-secondary" data-toggle="modal" data-target="#callmodal"><i class="material-icons">call</i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Max home</h6>
-                                        <p class="small text-mute"><i class="h6  my-0 material-icons text-success vm">call_received</i> 10 min ago</p>
-                                    </div>
-                                    <div class="col-auto pl-0">
-                                        <button class="btn btn-link text-secondary" data-toggle="modal" data-target="#callmodal"><i class="material-icons">call</i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Mr. Hulk</h6>
-                                        <p class="small text-mute"><i class="h6  my-0 material-icons text-danger vm">call_received</i> 18 min ago</p>
-                                    </div>
-                                    <div class="col-auto pl-0">
-                                        <button class="btn btn-link text-secondary" data-toggle="modal" data-target="#callmodal"><i class="material-icons">call</i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <figure class="avatar avatar-40">
-                                            <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="col pl-0 align-self-center">
-                                        <h6 class="mb-1 font-weight-normal">Ms. Happylime</h6>
-                                        <p class="small text-mute"><i class="h6  my-0 material-icons text-success vm">call_made</i> 20 min ago</p>
-                                    </div>
-                                    <div class="col-auto pl-0">
-                                        <button class="btn btn-link text-secondary" data-toggle="modal" data-target="#callmodal"><i class="material-icons">call</i></button>
-                                    </div>
-                                </div>
-                            </div>
-
+                <div id="results-container" class="container mt-4">
+                    <h6 class="page-subtitle">Results</h6>
+                    <div id="results-grid" class="row grid">
+                        <div class="col-12 text-center text-muted" id="results-placeholder">
+                            🔍 Please enter a username to search TikTok videos.
                         </div>
                     </div>
                 </div>
@@ -1616,100 +233,20 @@
                 </div>
                 <div class="container-fluid px-0">
                     <div class="list-group list-group-flush my-0 w-100 border-top border-bottom">
-                        <div class="list-group-item">
-                            <div class="row">
-                                <a class="col-auto" data-toggle="modal" data-target="#statusmodal">
-                                    <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </a>
-                                <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>Ankit Trivedi</b>, <b>John MAcMillan</b> and <b>36 others</b> are started following you </h6>
-                                    <p class="small text-mute">2 Days ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item bg-light text-center py-2 text-mute">This month</div>
-                        <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>Williums</b> Liked your picture you posted</h6>
-                                    <p class="small text-mute">last week</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>johnson</b> Followed you and he also folled many of your groups and community</h6>
-                                    <p class="small text-mute">2 Week ago</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/user1.png') }}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>Maxartkillers</b> Liked your picture you posted</h6>
-                                    <p class="small text-mute">2 Week ago</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="list-group-item" data-toggle="modal" data-target="#statusmodal">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/user2.png') }}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>Silvasaa </b> is now your follower please feel free to follow back</h6>
-                                    <p class="small text-mute">3 Week ago</p>
-                                </div>
-                            </div>
-                        </a>
                         <div class="list-group-item bg-light text-center py-2 text-mute">Earlier</div>
                         <a class="list-group-item">
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/user4.png') }}" alt="">
+                                        <img src="{{ asset('assets/img/icon/download.png') }}" alt="">
                                     </figure>
                                 </div>
                                 <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>Alic Boddy</b> Liked your picture you posted</h6>
+                                    <h6 class="mb-1 font-weight-normal"><b>Success</b> downloaded video from </h6>
                                     <p class="small text-mute">1 month ago</p>
                                 </div>
                             </div>
                         </a>
-                        <a class="list-group-item">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/user3.png') }}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>John</b> Liked your picture you posted</h6>
-                                    <p class="small text-mute">2 month ago</p>
-                                </div>
-                            </div>
-                        </a>
-
                     </div>
                 </div>
             </div>
@@ -1721,193 +258,29 @@
                 </div>
                 <div class="container top-100 text-center mb-4">
                     <figure class="avatar avatar-180 rounded-circle shadow  mx-auto">
-                        <img src="{{ asset('assets/img/user1.png') }}" alt="">
+                        <img src="{{ $profilData['avatarMD'] }}" alt="">
                     </figure>
                 </div>
                 <div class="container-fluid text-center">
-                    <h4>Maxartkiller</h4>
-                    <p class="text-mute">Working in Maxartkiller as UX Designer</p>
-                    <button class="btn  btn-default">+ Friend</button>
-                    <button class="btn  btn-info ml-2">Following</button>
+                    <h4 class="my-0">{{ $profilData['nickname'] }}</h4>
+                    <p class="text-mute my-0 small">{{ '@'.$profilData['username'] }}</p>
+                    <p class="mt-2">{{ $profilData['desc'] }}</p>
                     <div class="row py-4  bg-white mt-4">
                         <div class="col">
-                            <h4 class="mb-1">10k</h4>
+                            <h4 class="mb-1">{{ $profilData['following'] }}</h4>
                             <a href="#" class="text-mute">Following</a>
                         </div>
                         <div class="col">
-                            <h4 class="mb-1">10k</h4>
-                            <a href="#" class="text-mute">Likes</a>
+                            <h4 class="mb-1">{{ $profilData['follower'] }}</h4>
+                            <a href="#" class="text-mute">Followers</a>
                         </div>
                         <div class="col">
-                            <h4 class="mb-1">500</h4>
-                            <a href="#" class="text-mute">Friends</a>
+                            <h4 class="mb-1">{{ $profilData['likes'] }}</h4>
+                            <a href="#" class="text-mute">Likes</a>
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <h6 class="page-subtitle">Personal Details</h6>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label class="text-mute">Birth Date</label>
-                                <p>25/10/1981</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label class="text-mute">Gender</label>
-                                <p>Male</p>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label class="text-mute">Email Address</label>
-                                <p>info@maxartkiller.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="page-subtitle"><span>About</span></h6>
-                    <p class="text-mute">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut labore et dolore magna aliqua.</p>
-
-                    <p><i class="material-icons vm mr-2 text-mute">card_travel</i> Working at: <span class="text-mute-high">UX Designer at <a href="#">maxartkiller.com</a></span></p>
-                    <p><i class="material-icons vm mr-2 text-mute">class</i> Studied at: <span class="text-mute-high">London bridge University, London, UK</span></p>
-                    <p><i class="material-icons vm mr-2 text-mute">location_on</i> Lives in: <span class="text-mute-high">London, UK</span></p>
-
-                    <div class="card mb-4 overflow-hidden">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <div class="icons icon-circle icon-40 bg-light-primary text-primary mr-3">
-                                    <i class="material-icons">business</i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="my-0">Experience</h6>
-                                    <p class="text-mute">Currently working in Lighthearts since 2017</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="media experience">
-                                        <div class="icons icon-rounded icon-40 bg-light-success mr-3">
-                                            <i class="material-icons text-success">camera</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6>Lighthearts</h6>
-                                            <p class="mb-1 small text-mute">9-2018 to currently</p>
-                                            <p class="text-mute-high">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="media experience">
-                                        <div class="icons icon-rounded icon-40 bg-light-primary mr-3">
-                                            <i class="material-icons text-primary">local_library</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6>Swastics India</h6>
-                                            <p class="mb-1 small text-mute">11-2015 to 5-2018</p>
-                                            <p class="text-mute-high">lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="media experience">
-                                        <div class="icons icon-rounded icon-40 bg-light-danger mr-3">
-                                            <i class="material-icons text-danger">all_inclusive</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6>Microsofty</h6>
-                                            <p class="mb-1 small text-mute">1-2014 to 11-2015</p>
-                                            <p class="text-mute-high">lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card mb-4 overflow-hidden">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <div class="icons icon-circle icon-40 bg-light-warning mr-3">
-                                    <i class="material-icons">ac_unit</i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="my-0">Skills</h6>
-                                    <p class="text-mute">Head of User Experience design</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush w-100">
-                                <li class="list-group-item">
-                                    <div class="media experience">
-                                        <div class="icons icon-circle icon-40 bg-light-primary mr-3">
-                                            <i class="material-icons">camera</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6>User experience Design</h6>
-                                            <p class="mb-1 text-mute">Master in interaction design</p>
-                                            <p class="text-mute-high">orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="media experience">
-                                        <div class="icons icon-circle icon-40 bg-light-primary mr-3">
-                                            <i class="material-icons">local_library</i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6>UI design</h6>
-                                            <p class="mb-1 text-mute">Bechlore from Standform Univercity</p>
-                                            <p class="text-mute-high">orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h6 class="page-subtitle mt-0"><span>Recent Posts</span></h6>
-                    <div class="card mb-4">
-                        <div class="card-header border-bottom">
-                            <div class="media">
-                                <figure class="avatar avatar-40 mr-2">
-                                    <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                                </figure>
-                                <div class="media-body">
-                                    <h6 class="mb-1">Mariyam Saxena</h6>
-                                    <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                                </div>
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn dropdown-toggle btn-sm btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">Refresh</a>
-                                        <a href="#" class="dropdown-item">Setting</a>
-                                        <a href="#" class="dropdown-item">Close</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-0 text-mute">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip Lorem ipsum dolor sit amet. </p>
-                        </div>
-                        <div class="card-footer border-top bg-light">
-                            <p class="small"><b>250</b> Likes, <b>50</b> Comments, <b>10</b> Share </p>
-                        </div>
-                        <div class="card-footer border-top">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-danger">favorite_border</i> <span class="d-none d-sm-inline-block">Like</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-warning">chat</i> <span class="d-none d-sm-inline-block">Comments</span></button>
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons text-success">share</i> <span class="d-none d-sm-inline-block">Share</span></button>
-
-                                </div>
-                                <div class="col-auto ">
-                                    <button class="btn btn-link btn-sm px-2"><i class="material-icons">equalizer</i> <span class="d-none d-sm-inline-block">Analytics</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1916,10 +289,10 @@
             <div class="toast-header">
                 <div class="avatar avatar-20 mr-2">
                     <div class="background">
-                        <img src="{{ asset('assets/img/team3.jpg') }}" class="rounded mr-2" alt="...">
+                        <img src="{{ $profilData['avatarTumb'] }}" class="rounded mr-2" alt="...">
                     </div>
                 </div>
-                <strong class="mr-auto">Maxartkiller</strong>
+                <strong class="mr-auto">{{ $profilData['nickname'] }}</strong>
                 <small>Just now</small>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -1935,23 +308,10 @@
     <!-- Footer -->
     <footer class="footer mt-auto py-3">
         <div class="container section-100">
-            <h1>One<span>UI</span><span>UX</span></h1>
-            <p class="text-mute mt-4">Multipurpose multipages Mobile HTML template with large number of components and ready to use elements sections. This template build with Bootstrap 4, HTML, CSS, SCSS styling and JQuery.</p>
+            <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40" style="border-radius: 8px;">
+            <p class="text-mute mt-4">Get Your Favorite Video on TikTok Offline</p>
         </div>
         <hr class="mt-0">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-auto  text-center">
-                    <a href="https://www.facebook.com/maxartkiller/" target="_blank" class="btn btn-link px-2"><span class="social_facebook"></span></a>
-                    <a href="https://twitter.com/maxartkiller" class="btn btn-link px-2" target="_blank"><span class="social_twitter"></span></a>
-                    <a href="https://www.linkedin.com/company/maxartkiller" class="btn btn-link px-2" target="_blank"><span class="social_linkedin"></span></a>
-                    <a href="https://www.instagram.com/maxartkiller/" class="btn btn-link px-2" target="_blank"><span class="social_instagram"></span></a>
-                    <a href="https://dribbble.com/maxartkiller" class="btn btn-link px-2" target="_blank"><span class="social_dribbble"></span></a>
-                </div>
-            </div>
-            <hr>
-            <p class="text-center">For the humans by the human, <span class="text-mute">Hand Crafted by <a href="https://maxartkiller.com/" target="_blank">Maxartkiller</a> with </span><span class="text-danger">❤</span></p>
-        </div>
     </footer>
     <!-- Footer ends -->
 
@@ -1971,15 +331,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="chat-tab" data-toggle="tab" href="#chat" role="tab" aria-controls="chat" aria-selected="false">
-                    <i class="material-icons">chat_bubble_outline</i>
-                    <small class="sr-only">chat</small>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="false">
-                    <i class="material-icons">favorite_border</i>
-                    <small class="sr-only">favorite</small>
+                    <i class="material-icons">notifications</i>
+                    <small class="sr-only">Notification</small>
                 </a>
             </li>
             <li class="nav-item">
@@ -2016,138 +370,13 @@
                     <label for="templatecolor1" class="bg-dark-blue" data-title="dark-blue"></label>
                 </div>
                 <div class="colorselect">
-                    <input type="radio" id="templatecolor2" name="sidebarcolorselect">
-                    <label for="templatecolor2" class="bg-dark-purple" data-title="dark-purple"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor3" name="sidebarcolorselect">
-                    <label for="templatecolor3" class="bg-maroon" data-title="maroon"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor4" name="sidebarcolorselect">
-                    <label for="templatecolor4" class="bg-dark-gray" data-title="dark-gray"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor5" name="sidebarcolorselect">
-                    <label for="templatecolor5" class="bg-dark-pink" data-title="dark-pink"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor6" name="sidebarcolorselect">
-                    <label for="templatecolor6" class="bg-dark-brown" data-title="dark-brown"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor7" name="sidebarcolorselect">
-                    <label for="templatecolor7" class="bg-dark-green" data-title="dark-green"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor8" name="sidebarcolorselect">
-                    <label for="templatecolor8" class="bg-red" data-title="red"></label>
-                </div>
-                <div class="colorselect">
                     <input type="radio" id="templatecolor9" name="sidebarcolorselect">
                     <label for="templatecolor9" class="bg-purple" data-title="purple"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor10" name="sidebarcolorselect">
-                    <label for="templatecolor10" class="bg-blue" data-title="blue"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor11" name="sidebarcolorselect">
-                    <label for="templatecolor11" class="bg-teal" data-title="teal"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor12" name="sidebarcolorselect">
-                    <label for="templatecolor12" class="bg-skyblue" data-title="skyblue"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor13" name="sidebarcolorselect">
-                    <label for="templatecolor13" class="bg-amber" data-title="amber"></label>
-                </div>
-                <div class="colorselect">
-                    <input type="radio" id="templatecolor14" name="sidebarcolorselect">
-                    <label for="templatecolor14" class="bg-gray" data-title="gray"></label>
                 </div>
             </div>
         </div>
     </div>
     <!-- color settings ends -->
-
-    <!-- status modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="statusmodal">
-        <div class="modal-dialog vh-100 my-0 mx-auto" role="document">
-            <div class="modal-content h-100 border-0 bg-dark text-white rounded-0">
-                <div class="progress m-2 h-3">
-                    <div class="progress-bar statusbar" role="progressbar"></div>
-                </div>
-                <div class="modal-header border-0 py-2" data-dismiss="modal" aria-label="Close">
-                    <div class="media w-100">
-                        <figure class="avatar avatar-40 mr-2">
-                            <img src="{{ asset('assets/img/user5.png') }}" alt="Generic placeholder image">
-                        </figure>
-                        <div class="media-body">
-                            <h6 class="mb-1">Mariyam Saxena</h6>
-                            <p class="mb-0 text-mute small">7-11-2018 | Public</p>
-                        </div>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-body my-0">
-                    <div class="row h-100">
-                        <div class="col-12 align-self-center text-center">
-                            <figure class="h-100 w-100">
-                                <img src="{{ asset('assets/img/team6.jpg') }}" alt="" class="mw-100 vm">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center text-center border-0">
-                    Awesome click posted
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- status modal ends -->
-
-    <!-- call modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="callmodal" aria-hidden="true">
-        <div class="modal-dialog vh-100 m-0 mw-100" role="document">
-            <div class="modal-content h-100 border-0 bg-default text-white blur rounded-0">
-                <div class="modal-body my-0">
-                    <div class="row h-100">
-                        <div class="col-12 align-self-center text-center">
-                            <figure class="avatar avatar-150 mb-4">
-                                <img src="{{ asset('assets/img/team5.jpg') }}" alt="" class="mw-100 vm">
-                            </figure>
-
-                            <h4 class="font-weight-normal">Angelina Mosaic</h4>
-                            <p class="text-mute">+0019541858931542</p>
-                            <p class="lead">00:30</p>
-
-                            <div class="row justify-content-center">
-                                <div class="col-auto text-center mb-4">
-                                    <button class="btn btn-44 btn-outline-default text-white"><i class="material-icons">volume_up</i></button>
-                                </div>
-                                <div class="col-auto text-center mb-4">
-                                    <button class="btn btn-44 btn-outline-default text-white"><i class="material-icons">videocam</i></button>
-                                </div>
-                                <div class="col-auto text-center mb-4">
-                                    <button class="btn btn-44 btn-outline-default text-white"><i class="material-icons">mic_none</i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-footer justify-content-center text-center border-0">
-                    <button class="btn btn-danger text-white btncallmodal" data-dismiss="modal" aria-label="Close"><i class="material-icons">call</i> End Call</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Call modal ends -->
 
     <!-- Required jquery and libraries -->
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
@@ -2231,12 +460,135 @@
             /* toast message */
             setTimeout(function() {
                 $('.toast').toast('show')
-            },2000);
+            },4000);
         });
 
+    </script>
+
+    <script>
+        let page = 1;
+        let loading = false;
+        let hasMore = true;
+        
+        function loadMore() {
+            if (loading || !hasMore) return;
+            loading = true;
+            $('#skeleton-loader').show();
+
+            $.ajax({
+                url: "{{ route('home') }}",
+                type: "GET",
+                data: { page: page },
+                success: function(response) {
+                    $('#video-container').append(response.html);
+                    hasMore = response.hasMore;
+                    if (!hasMore) $('#no-more').show();
+                    page++;
+                },
+                complete: function() {
+                    $('#skeleton-loader').hide();
+                    loading = false;
+                },
+                error: function() {
+                    console.error('Failed to load videos.');
+                }
+            });
+        }
+
+        
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() + $(window).height() + 100 >= $(document).height()) {
+                loadMore();
+            }
+        });
+        
+        // Initial load
+        loadMore();
+    </script>
+
+    <script>
+        $('#searchBtn').on('click', function () {
+            const username = $('#username').val().trim();
+
+            $('#results-grid').html(`
+                <div class="col-12 text-center text-muted">⏳ Loading...</div>
+            `);
+
+            if (!username) {
+                $('#results-grid').html(`
+                    <div class="col-12 text-center text-danger">❌ Please enter a username.</div>
+                `);
+                return;
+            }
+
+            $.ajax({
+                url: '{{ route('find') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    username: username
+                },
+                success: function (response) {
+                    if (response.results.length === 0) {
+                        $('#results-grid').html(`
+                            <div class="col-12 text-center text-warning">🙁 No videos found.</div>
+                        `);
+                        return;
+                    }
+
+                    let html = '';
+                    response.results.forEach(function (video) {
+                        let encoded = video.encodedUrl;
+                        let downloadUrl = `{{ route('downloadVideo', ['encodedUrl' => '__ENCODED__']) }}`.replace('__ENCODED__', encoded);
+
+                        html += `
+                            <div class="grid-item col-6 col-md-4">
+                                <div class="card mb-4 position-relative overflow-hidden text-white">
+                                    <div class="background">
+                                        <div class="video-wrapper">
+                                            <video autoplay muted loop playsinline controls>
+                                                <source src="${video.url}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </div>
+                                    <div class="card-header border-0 bg-none">
+                                        <div class="media">
+                                            <form action="${downloadUrl}" method="POST">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="mdi mdi-download"></i> Download
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer border-0 z-1">
+                                        <div class="media">
+                                            <figure class="avatar avatar-40 mr-2">
+                                                <img src="${video.avatar}" alt="Profile">
+                                            </figure>
+                                            <div class="media-body">
+                                                <h6 class="mb-1">${video.nickname}</h6>
+                                                <p class="mb-0 text-mute small">${video.username}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    $('#results-grid').html(html);
+                },
+                error: function () {
+                    $('#results-grid').html(`
+                        <div class="col-12 text-center text-danger">⚠️ Failed to fetch data.</div>
+                    `);
+                }
+            });
+        });
     </script>
 </body>
 
 
-<!-- Mirrored from oneuiux.com/mobile/social/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Jul 2025 18:45:46 GMT -->
 </html>
