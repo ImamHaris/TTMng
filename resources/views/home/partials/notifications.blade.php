@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-auto">
                 <figure class="avatar avatar-40">
-                    <img src="{{ asset('assets/img/icon/download.png') }}" alt="">
+                    <img src="{{ asset('public/assets/img/icon/download.png') }}" alt="">
                 </figure>
             </div>
             <div class="col pl-0 align-self-center">

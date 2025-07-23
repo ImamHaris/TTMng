@@ -9,24 +9,24 @@
         <title>TikTok Download Manager - Get Video You Interest Offline</title>
     
         <!-- Favicons -->
-        <link rel="apple-touch-icon" href="{{ asset('assets/img/favicons/apple-touch-icon.html') }}" sizes="180x180">
-        <link rel="mask-icon" href="{{ asset('assets/img/favicons/safari-pinned-tab.html') }}" color="#ffffff">
-        <link rel="icon" href="{{ asset('assets/img/logo/logo-icon.png') }}" type="image/png">
+        <link rel="apple-touch-icon" href="{{ asset('public/assets/img/favicons/apple-touch-icon.html') }}" sizes="180x180">
+        <link rel="mask-icon" href="{{ asset('public/assets/img/favicons/safari-pinned-tab.html') }}" color="#ffffff">
+        <link rel="icon" href="{{ asset('public/assets/img/logo/logo-icon.png') }}" type="image/png">
     
         <!-- Elegant font icons -->
-        <link href="{{ asset('assets/vendor/elegant_font/HTMLCSS/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('public/assets/vendor/elegant_font/HTMLCSS/style.css') }}" rel="stylesheet">
     
         <!-- Elegant font icons -->
-        <link href="{{ asset('assets/vendor/materializeicon/material-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('public/assets/vendor/materializeicon/material-icons.css') }}" rel="stylesheet">
     
         <!-- Swiper Slider -->
-        <link href="{{ asset('assets/vendor/swiper/css/swiper.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('public/assets/vendor/swiper/css/swiper.min.css') }}" rel="stylesheet">
     
         <!-- Custom styles for this template -->
-        <link href="{{ asset('assets/css/style-dark-blue.css') }}" rel="stylesheet" id="style">
+        <link href="{{ asset('public/assets/css/style-dark-blue.css') }}" rel="stylesheet" id="style">
     
         <!-- Icons Css -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/@mdi/css/materialdesignicons.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/libs/@mdi/css/materialdesignicons.min.css') }}" />
     </head>
 
     <!-- Loading -->
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-12 align-self-center text-center">
                     <div class="loader-logo">
-                        <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40" style="border-radius: 8px;">
+                        <img src="{{ asset('public/assets/img/logo/logo.png') }}" alt="" height="40" style="border-radius: 8px;">
                     </div>
                 </div>
                 <div class="col-12 align-self-end text-center">
@@ -56,7 +56,7 @@
                 <div></div>
                 <div>
                     <a class="navbar-brand" href="{{ route('login') }}">
-                        <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40" style="border-radius: 8px;">
+                        <img src="{{ asset('public/assets/img/logo/logo.png') }}" alt="" height="40" style="border-radius: 8px;">
                     </a>
                 </div>
                 <div></div>
@@ -215,21 +215,21 @@
         <!-- End of page content -->
         
         <!-- Required jquery and libraries -->
-        <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-        <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-4.4.1/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('public/assets/vendor/bootstrap-4.4.1/js/bootstrap.min.js') }}"></script>
 
         <!-- cookie css -->
-        <script src="{{ asset('assets/vendor/cookie/jquery.cookie.js') }}"></script>
+        <script src="{{ asset('public/assets/vendor/cookie/jquery.cookie.js') }}"></script>
 
         <!-- Swiper slider  -->
-        <script src="{{ asset('assets/vendor/swiper/js/swiper.min.js') }}"></script>
+        <script src="{{ asset('public/assets/vendor/swiper/js/swiper.min.js') }}"></script>
 
         <!-- Customized jquery file  -->
-        <script src="{{ asset('assets/js/main.js') }}"></script>
-        <script src="{{ asset('assets/js/color-scheme-demo.js') }}"></script>
+        <script src="{{ asset('public/assets/js/main.js') }}"></script>
+        <script src="{{ asset('public/assets/js/color-scheme-demo.js') }}"></script>
 
-        <script src="{{ asset('assets/js/formLoad.js') }}"></script>
+        <script src="{{ asset('public/assets/js/formLoad.js') }}"></script>
 
         <script>
             $(document).ready(function() {
