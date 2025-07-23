@@ -24,87 +24,10 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/style-dark-blue.css') }}" rel="stylesheet" id="style">
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 
     <!-- Icons Css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/@mdi/css/materialdesignicons.min.css') }}" />
-
-    <style>
-        .video-wrapper {
-            width: 100%;
-        }
-    
-        .video-wrapper video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px; /* optional */
-        }
-    </style>
-
-    <style>
-        .skeleton-card {
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            padding: 16px;
-            animation: pulse 1.5s infinite;
-        }
-
-        .skeleton {
-            background-color: #e0e0e0;
-            border-radius: 4px;
-        }
-
-        .skeleton.avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .skeleton.text-sm {
-            height: 12px;
-            width: 60%;
-            margin-top: 6px;
-        }
-
-        .skeleton.text-md {
-            height: 16px;
-            width: 40%;
-            margin-top: 10px;
-        }
-
-        .skeleton.video {
-            height: 300px;
-            width: 100%;
-            margin-top: 12px;
-        }
-
-        .skeleton.meta {
-            height: 12px;
-            width: 80%;
-            margin-top: 12px;
-        }
-
-        .skeleton.button {
-            height: 35px;
-            width: 100px;
-            margin: 10px auto 0;
-            border-radius: 25px;
-        }
-
-        @keyframes pulse {
-            0% {
-                background-color: #f0f0f0;
-            }
-            50% {
-                background-color: #e0e0e0;
-            }
-            100% {
-                background-color: #f0f0f0;
-            }
-        }
-    </style>
-
 </head>
 
 <body class="ui-rounded">
@@ -163,7 +86,7 @@
                 <p class="text-mute my-0 small">{{ '@'.$profilData['username'] }}</p>
             </div>
             <div class="col-auto align-self-center">
-                <a href="login.html" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
+                <a href="{{ route('logout') }}" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
         </div>
         <div class="list-group main-menu my-4">
@@ -232,21 +155,8 @@
                     <h5 class="page-subtitle">Activity</h5>
                 </div>
                 <div class="container-fluid px-0">
-                    <div class="list-group list-group-flush my-0 w-100 border-top border-bottom">
-                        <div class="list-group-item bg-light text-center py-2 text-mute">Earlier</div>
-                        <a class="list-group-item">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <figure class="avatar avatar-40">
-                                        <img src="{{ asset('assets/img/icon/download.png') }}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="col pl-0 align-self-center">
-                                    <h6 class="mb-1 font-weight-normal"><b>Success</b> downloaded video from </h6>
-                                    <p class="small text-mute">1 month ago</p>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="list-group list-group-flush my-0 w-100 border-top border-bottom" id="notification-list">
+                        <!-- AJAX content goes here -->
                     </div>
                 </div>
             </div>
@@ -466,19 +376,30 @@
     </script>
 
     <script>
-        let page = 1;
+        const listAccount = @json($listAccount);
+        let page = 0;
         let loading = false;
         let hasMore = true;
-        
+        let perPage = 1;
+
         function loadMore() {
             if (loading || !hasMore) return;
             loading = true;
             $('#skeleton-loader').show();
 
+            // Get unique_id for current page
+            const sliced = listAccount.slice(page * perPage, (page + 1) * perPage);
+
+            if (sliced.length === 0) {
+                hasMore = false;
+                $('#no-more').show();
+                return;
+            }
+
             $.ajax({
-                url: "{{ route('home') }}",
+                url: "{{ route('getHomeData') }}",
                 type: "GET",
-                data: { page: page },
+                data: { unique_id: sliced[0] },
                 success: function(response) {
                     $('#video-container').append(response.html);
                     hasMore = response.hasMore;
@@ -495,16 +416,15 @@
             });
         }
 
-        
         $(window).on('scroll', function() {
             if ($(window).scrollTop() + $(window).height() + 100 >= $(document).height()) {
                 loadMore();
             }
         });
-        
-        // Initial load
-        loadMore();
+
+        loadMore(); // Initial load
     </script>
+
 
     <script>
         $('#searchBtn').on('click', function () {
@@ -539,7 +459,11 @@
                     let html = '';
                     response.results.forEach(function (video) {
                         let encoded = video.encodedUrl;
-                        let downloadUrl = `{{ route('downloadVideo', ['encodedUrl' => '__ENCODED__']) }}`.replace('__ENCODED__', encoded);
+                        let username = video.username;
+
+                        let downloadUrl = `{{ route('downloadVideo', ['encodedUrl' => '__ENCODED__', 'username' => '__USERNAME__']) }}`
+                            .replace('__ENCODED__', encoded)
+                            .replace('__USERNAME__', username);
 
                         html += `
                             <div class="grid-item col-6 col-md-4">
@@ -555,7 +479,7 @@
                                     <div class="card-header border-0 bg-none">
                                         <div class="media">
                                             <form action="${downloadUrl}" method="POST">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                @csrf
                                                 <button type="submit" class="btn btn-success">
                                                     <i class="mdi mdi-download"></i> Download
                                                 </button>
@@ -588,6 +512,27 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#favorite-tab').on('click', function () {
+                const container = $('#notification-list');
+                container.html('<div class="text-center my-3 text-muted">Loading...</div>');
+        
+                $.ajax({
+                    url: '{{ route("notifications.latest") }}',
+                    type: 'GET',
+                    success: function (data) {
+                        container.html(data);
+                    },
+                    error: function () {
+                        container.html('<div class="text-center my-3 text-danger">Failed to load notifications.</div>');
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 
 

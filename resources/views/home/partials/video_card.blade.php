@@ -25,7 +25,7 @@
             <p class="small"><b>{{ $item['like'] }}</b> Likes, <b>{{ $item['comment'] }}</b> Comments, <b>{{ $item['share'] }}</b> Share </p>
         </div>
         <div class="card-footer border-top d-flex justify-content-center">
-            <form action="{{ route('downloadVideo', ['encodedUrl' => $item['encodedUrl']]) }}" method="POST">
+            <form action="{{ route('downloadVideo', ['encodedUrl' => $item['encodedUrl'], 'username' => $item['username']]) }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-success">
                     <i class="mdi mdi-download"></i> Download

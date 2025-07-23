@@ -1,0 +1,72 @@
+.video-wrapper {
+    width: 100%;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; /* optional */
+}
+
+.skeleton-card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 16px;
+    animation: pulse 1.5s infinite;
+}
+
+.skeleton {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeleton.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.skeleton.text-sm {
+    height: 12px;
+    width: 60%;
+    margin-top: 6px;
+}
+
+.skeleton.text-md {
+    height: 16px;
+    width: 40%;
+    margin-top: 10px;
+}
+
+.skeleton.video {
+    height: 300px;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.skeleton.meta {
+    height: 12px;
+    width: 80%;
+    margin-top: 12px;
+}
+
+.skeleton.button {
+    height: 35px;
+    width: 100px;
+    margin: 10px auto 0;
+    border-radius: 25px;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #f0f0f0;
+    }
+    50% {
+        background-color: #e0e0e0;
+    }
+    100% {
+        background-color: #f0f0f0;
+    }
+}

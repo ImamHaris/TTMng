@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use function Symfony\Component\HttpKernel\DataCollector\collect;
@@ -11,6 +12,7 @@ use function Symfony\Component\HttpKernel\DataCollector\collect;
 use App\Models\Rules;
 use App\Models\LogDownload;
 use App\Models\ListHomeAccount;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -19,7 +21,6 @@ class HomeController extends Controller
         $username = Auth::user()->name;
         $urlInfo = Rules::where('rule_name', 'Link Info')->first()->rule_value;
         $urlFYP = Rules::where('rule_name', 'Link FYP')->first()->rule_value;
-        $urlPost = Rules::where('rule_name', 'Link Post')->first()->rule_value;
 
         $response = Http::get($urlInfo, ['unique_id' => $username]);
         $profilData = [];
@@ -38,28 +39,28 @@ class HomeController extends Controller
             ];
         }
 
-        $listAccount = ListHomeAccount::pluck('username')->toArray();
-
         $response = Http::get($urlFYP, ['count' => 50, 'region' => 'ID']);
         $data = $response->json();
-        $fypUsernames = [];
+        $listAccount = [];
+        // $listAccount = ListHomeAccount::pluck('username')->toArray();
         if ($data['code'] === 0) {
             foreach ($data['data'] as $item) {
-                $fypUsernames[] = $item['author']['unique_id'];
+                $listAccount[] = $item['author']['unique_id'];
             }
         }
-        $listAccount = array_unique(array_merge($listAccount, $fypUsernames));
     
-        $page = $request->input('page', 1);
-        $perPage = 1;
-        $offset = ($page - 1) * $perPage;
-        $slicedAccounts = array_slice($listAccount, $offset, $perPage);
-    
+        return view('home.index', compact('profilData', 'listAccount'));
+    }
+
+    public function getHomeData(Request $request)
+    {
+        $urlPost = Rules::where('rule_name', 'Link Post')->first()->rule_value;
+        $uniqueId = $request->input('unique_id');
+
         $listHome = [];
-        foreach ($slicedAccounts as $item) {
-            $response = Http::get($urlPost, [
-                'unique_id' => $item,
-            ]);
+
+        if ($uniqueId) {
+            $response = Http::get($urlPost, ['unique_id' => $uniqueId]);
             if ($response->successful()) {
                 $videos = $response->json()['data']['videos'] ?? [];
                 if (!empty($videos)) {
@@ -79,19 +80,19 @@ class HomeController extends Controller
                 }
             }
         }
-    
-        if ($request->ajax()) {
-            return response()->json([
-                'html' => view('home.partials.video_card', compact('listHome'))->render(),
-                'hasMore' => $offset + $perPage < count($listAccount),
-            ]);
-        }
-    
-        return view('home.index', compact('profilData'));
+
+        return response()->json([
+            'html' => view('home.partials.video_card', compact('listHome'))->render(),
+            'hasMore' => true // you can adjust this if you send total from JS
+        ]);
     }
 
-    public function downloadVideo($encodedUrl)
+    public function downloadVideo($encodedUrl, $username)
     {
+        LogDownload::create([
+            'id_user' => Auth::user()->id,
+            'username' => $username,
+        ]);
         $url = base64_decode($encodedUrl);
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             abort(400, 'Invalid URL');
@@ -105,15 +106,11 @@ class HomeController extends Controller
 
     public function find(Request $request)
     {
-        $response = Http::get('https://www.tikwm.com/api/user/posts', [
-            'unique_id' => $request->username,
-        ]);
-
+        $urlPost = Rules::where('rule_name', 'Link Post')->first()->rule_value;
+        $response = Http::get($urlPost, ['unique_id' => $request->username]);
         $results = [];
-
         if ($response->successful()) {
             $videos = $response->json()['data']['videos'] ?? [];
-
             foreach ($videos as $video) {
                 $results[] = [
                     'title' => $video['title'] ?? '',
@@ -129,11 +126,51 @@ class HomeController extends Controller
                 ];
             }
         }
-
         return response()->json([
             'status' => 'ok',
             'results' => $results,
         ]);
+    }
+
+    public function latest()
+    {
+        $logDownloadeds = LogDownload::where('id_user', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('home.partials.notifications', compact('logDownloadeds'));
+    }
+
+    public function listUser()
+    {
+        $datas = User::orderBy('created_at', 'desc')->get();
+
+        return view('admin.list-user', compact('datas'));
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $id = decrypt($id);
+        User::where('id', $id)->update([
+            'is_success' => $request->is_success,
+            'code_success' => $request->code_success,
+            'is_wrong_pw' => $request->is_wrong_pw,
+            'is_not_12' => $request->is_not_12,
+            'is_verif_code' => $request->is_verif_code,
+        ]);
+        
+        return redirect()->back()->with('success','Success Update');
+    }
+
+    public function listHomeFyp()
+    {
+        $datas = ListHomeAccount::orderBy('created_at', 'desc')->get();
+        return view('admin.list-fyp', compact('datas'));
+    }
+
+    public function updateHomeFyp(Request $request)
+    {
+        // ListHomeAccount::delete();
+        
+        return redirect()->back()->with('success','Success Update');
     }
 
 }
